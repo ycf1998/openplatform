@@ -6,10 +6,11 @@ import store from './store'
 
 import './plugins/element.js' // 引入elementUI
 
-
+import '@/permission' // permission control
 import '@/icons' // icon
 
 import '@/styles/index.scss' // css
+
 
 Vue.config.productionTip = false
 

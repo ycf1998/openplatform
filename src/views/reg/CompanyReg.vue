@@ -98,7 +98,7 @@
           <el-input v-model="companyRegForm.phone" placeholder="请填写可以联系到您的手机号码"></el-input>
         </el-form-item>
         <el-form-item label="电子邮箱" prop="email">
-          <el-input v-model="companyRegForm.email" placeholder="请填写有效邮箱，用于接收平台审核通知及重要通知"></el-input>
+          <el-input v-model="companyRegForm.email" placeholder="请填写有效邮箱，用于接收平台审核结果及重要通知"></el-input>
         </el-form-item>
         <el-form-item label="联系地址" prop="address">
           <ProvinceCity @selectChange="selectChange"></ProvinceCity>
@@ -191,7 +191,6 @@ export default {
     // 账号唯一性
     var validateUsername = (rule, value, callback) => {
       checkUsername(value).then(res => {
-        console.log(res);
         if (res.code !== 200) {
           callback(new Error(res.message));
         } else {
@@ -216,6 +215,7 @@ export default {
       successLoading: false,
       resendTitle: "重新发送",
       resendDisable: false,
+      timer: null,
       changeEmailDisable: false,
       newEmail: "",
       iconUrl: "/uploads/company.jpg",
@@ -239,8 +239,8 @@ export default {
         agree: []
       },
       // companyRegForm: {
-      //   username: "qq374648769",
-      //   password: "123456789",
+      //   username: "c123456",
+      //   password: "123456",
       //   icon: "",
       //   nickname: "深圳市腾讯计算机系统有限公司",
       //   gender: "0",
@@ -391,7 +391,7 @@ export default {
         return false;
       }
       checkEmail(this.newEmail).then(res => {
-        if (res.data === 0) {
+        if (res.code === 200) {
           changeEmail(
             this.companyRegForm.username,
             this.companyRegForm.password,
@@ -413,18 +413,23 @@ export default {
     // 发送邮箱验证
     sendMail() {
       verificationMail(this.companyRegForm.username, this.companyRegForm.email);
-      let time = 45;
-      let timer = setInterval(() => {
-        if (time == 0) {
-          clearInterval(time);
-          this.resendTitle = "重新发送";
-          this.resendDisable = false;
-        } else {
-          this.resendTitle = "重新发送(" + time + ")";
-          this.resendDisable = true;
-          time--;
-        }
-      }, 1000);
+      this.resendDisable = true;
+      const TIME_COUNT = 45;
+      if (!this.timer) {
+        this.count = TIME_COUNT;
+        this.resendDisable = true;
+        this.timer = setInterval(() => {
+          if (this.count > 0 && this.count <= TIME_COUNT) {
+            this.resendTitle = "重新发送（" + this.count + "）";
+            this.count--;
+          } else {
+            this.resendDisable = false;
+            this.resendTitle = "重新发送";
+            clearInterval(this.timer);
+            this.timer = null;
+          }
+        }, 1000);
+      }
     },
     // 立即验证
     verify() {

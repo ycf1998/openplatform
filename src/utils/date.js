@@ -1,4 +1,9 @@
 // date.js
+export function formatBirthday(date) {
+  const birthday = /\d{4}-\d{1,2}-\d{1,2}/g.exec(date);
+  return birthday[0];
+}
+
 export function formatDate(date, fmt) {
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));

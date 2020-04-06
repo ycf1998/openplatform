@@ -22,3 +22,14 @@ export function resetPasswordMail(email) {
         method: "get"
     })
 }
+
+/**
+ * 发送激活开发者资质邮箱
+ * @param {*} email 
+ */
+export function activeEmailMail(email) {
+    return request({
+        url: "/mail/activeEmailMail?email=" + email,
+        method: "get"
+    })
+}

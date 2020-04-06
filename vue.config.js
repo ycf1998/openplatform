@@ -4,7 +4,7 @@ module.exports = {
   // 开发时，代理后台接口的配置
   devServer: {
     // // 设置默认端口
-    // port: 8081,
+    port: 8081,
     // 默认打开浏览器
     open: false,
     // 设置代理
@@ -13,7 +13,7 @@ module.exports = {
       '/api': {
         // 目标 API 地址
         // target: 'http://118.31.77.63:8080', // 真实的api地址
-        target: 'http://localhost:8080', // 真实的api地址
+        target: 'http://127.0.0.1:8080', // 真实的api地址
         // 如果要代理 websockets
         // ws: true,
         // 将主机标头的原点更改为目标URL
@@ -23,7 +23,7 @@ module.exports = {
         }
       },
       '/uploads': {
-          target: 'http://localhost:8080/uploads',
+          target: 'http://127.0.0.1:8080/uploads',
           changeOrigin: true,
           pathRewrite: {
             '^/uploads': '/'

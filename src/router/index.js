@@ -24,9 +24,8 @@ import Layout from '@/layout'
   }
  */
 
- // 公共路由
-export const constantRoutes = [
-  {
+// 公共路由
+export const constantRoutes = [{
     path: '/redirect',
     component: Layout,
     hidden: true,
@@ -35,11 +34,31 @@ export const constantRoutes = [
       component: () => import('@/views/redirect/index')
     }]
   },
-  {path: '/login', component: () => import('@/views/login'), hidden: true},
-  {path: '/reg', component: () => import('@/views/reg'), hidden: true},
-  {path: '/active-dev', component: () => import('@/views/active-dev'), hidden: true},
-  {path: '/reset-password', component: () => import('@/views/reset-password'), hidden: true},
-  {path: '/set-new-password', component: () => import('@/views/set-new-password'), hidden: true},
+  {
+    path: '/login',
+    component: () => import('@/views/login'),
+    hidden: true
+  },
+  {
+    path: '/reg',
+    component: () => import('@/views/reg'),
+    hidden: true
+  },
+  {
+    path: '/active-dev',
+    component: () => import('@/views/active-dev'),
+    hidden: true
+  },
+  {
+    path: '/reset-password',
+    component: () => import('@/views/reset-password'),
+    hidden: true
+  },
+  {
+    path: '/set-new-password',
+    component: () => import('@/views/set-new-password'),
+    hidden: true
+  },
   {
     path: '/',
     component: Layout,
@@ -50,7 +69,7 @@ export const constantRoutes = [
       component: () => import('@/views/home'),
       meta: {
         title: '首页',
-        icon: 'dashboard',
+        icon: 'home',
         affix: true // 固定
       }
     }]
@@ -71,15 +90,16 @@ export const constantRoutes = [
     }]
   },
   {
-    path: '/icons',
+    path: '/loginLog',
     component: Layout,
-    redirect: '/icons',
+    redirect: '/loginLog/index',
+    hidden: true,
     children: [{
-      path: 'icons',
-      component: () => import('@/views/icons'),
-      name: 'Icons',
+      path: 'index',
+      component: () => import('@/views/loginLog'),
+      name: 'LoginLog',
       meta: {
-        title: 'svg图标',
+        title: '登录日志',
         noCache: true
       }
     }]
@@ -93,23 +113,68 @@ export const constantRoutes = [
 
 //异步挂载的路由
 //动态需要根据权限加载的路由表 
-export const asyncRoutes = [
-  {
-    path: '/permission',
+export const asyncRoutes = [{
+    path: '/ams',
     component: Layout,
-    redirect: '/permission',
+    redirect: '/ams/app',
+    meta: {
+      title: '应用服务',
+      icon: 'app-service',
+    },
     children: [{
-      path: 'permission',
-      component: () => import('@/views/permission'),
-      name: 'permission',
+        path: '/addApp',
+        component: () => import('@/views/ams/app/create'),
+        name: 'AddApp',
+        meta: {
+          title: '创建应用',
+          icon: 'app-create',
+          role: ['DEV'],
+          noCache: true,
+        }
+      },
+      {
+        path: '/app',
+        component: () => import('@/views/ams/app'),
+        name: 'App',
+        meta: {
+          title: '应用管理',
+          icon: 'app-manage',
+          role: ['DEV']
+        },
+      },
+      {
+        path: '/editApp',
+        name: 'editApp',
+        component: () => import('@/views/ams/app/edit'),
+        meta: {
+          title: '修改应用',
+          role: ['DEV'],
+          noCache: true,
+        },
+        hidden: false
+      }
+    ]
+  },
+  {
+    path: '/icons',
+    component: Layout,
+    redirect: '/icons',
+    children: [{
+      path: 'icons',
+      component: () => import('@/views/icons'),
+      name: 'Icons',
       meta: {
-        title: '权限',
-        icon: 'user',
-        role: ['admin', 'super_editor']
+        title: 'svg图标',
+        icon: 'birthday-today',
+        noCache: true
       }
     }]
   },
-  { path: '*', redirect: '/404', hidden: true }
+  {
+    path: '*',
+    redirect: '/404',
+    hidden: true
+  }
 ];
 
 
@@ -117,7 +182,9 @@ const createRouter = () => new Router({
   // 使用history必须要写base
   mode: 'history',
   base: process.env.BASE_URL,
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({
+    y: 0
+  }),
   routes: constantRoutes
 })
 

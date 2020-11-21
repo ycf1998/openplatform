@@ -48,6 +48,24 @@ service.interceptors.response.use(
           })
         })
       }
+
+      // 400 参数异常
+      if (res.code === 400) {
+        Message({
+          message: res.message,
+          type: 'error',
+          duration: 3 * 1000
+        })
+      }
+
+      // 500 参数异常
+      if (res.code === 500) {
+        Message({
+          message: res.message || '服务器异常',
+          type: 'error',
+          duration: 3 * 1000
+        })
+      }
       return Promise.reject('error')
     } else {
       return response.data

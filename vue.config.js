@@ -12,7 +12,7 @@ module.exports = {
       // 这样就可以在代码中用/api来代替http://localhost:8080，如换axios的基础路径为/api
       '/api': {
         // 目标 API 地址
-        // target: 'http://118.31.77.63:8080', // 真实的api地址
+        //target: 'http://118.31.77.63:8080', // 真实的api地址
         target: 'http://127.0.0.1:8080', // 真实的api地址
         // 如果要代理 websockets
         // ws: true,
@@ -23,6 +23,7 @@ module.exports = {
         }
       },
       '/uploads': {
+        //target: 'http://118.31.77.63:8080/uploads',
           target: 'http://127.0.0.1:8080/uploads',
           changeOrigin: true,
           pathRewrite: {

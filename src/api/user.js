@@ -11,6 +11,16 @@ export function getProfile() {
 }
 
 /**
+ * 获取登录日志
+ */
+export function getLoginLog() {
+    return request({
+        url: '/user/loginLog',
+        method: 'get'
+    })
+}
+
+/**
  * 获取开发者资质
  */
 export function getDevProfile(type) {

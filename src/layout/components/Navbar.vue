@@ -27,12 +27,15 @@
           <router-link to="/profile">
             <el-dropdown-item>个人中心</el-dropdown-item>
           </router-link>
-          <a target="_blank" href="https://github.com/ycf1998/openplatform">
+          <a target="_blank" href="https://github.com/ycf1998/MoneyStore">
             <el-dropdown-item>Github</el-dropdown-item>
           </a>
           <a target="_blank" href="https://juejin.im/user/5d7e5160f265da03da24c59a">
             <el-dropdown-item>blog</el-dropdown-item>
           </a>
+          <router-link to="/loginLog">
+            <el-dropdown-item>登录日志</el-dropdown-item>
+          </router-link>
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">Log Out</span>
           </el-dropdown-item>

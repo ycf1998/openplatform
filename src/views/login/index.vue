@@ -68,8 +68,8 @@ export default {
   data() {
     return {
       loginForm: {
-        username: "",
-        password: ""
+        username: "p123456",
+        password: "123456"
       },
       loginRules: {
         username: [
@@ -85,8 +85,8 @@ export default {
     };
   },
   created() {
-    this.loginForm.username = getCookie("username");
-    this.loginForm.password = getCookie("password");
+    // this.loginForm.username = getCookie("username");
+    // this.loginForm.password = getCookie("password");
   },
   methods: {
     handleLogin() {

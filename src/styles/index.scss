@@ -48,8 +48,18 @@ a,
 a:focus,
 a:hover {
   cursor: pointer;
+  // color: -webkit-link;
+  // text-decoration: udertLine;
   color: inherit;
   text-decoration: none;
+}
+
+a.old-link,
+a.old-link:focus,
+a.old-link:hover {
+  cursor: pointer;
+  color: -webkit-link;
+  text-decoration: udertLine;
 }
 
 div:focus {
@@ -124,7 +134,7 @@ aside {
 }
 
 .components-container {
-  margin: 30px 50px;
+  margin: 20px 50px;
   position: relative;
 }
 

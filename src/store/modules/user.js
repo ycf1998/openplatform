@@ -4,7 +4,7 @@ import { getToken, setToken, removeToken } from '@/utils/auth.js'
 const user = {
   state: {
     token: getToken(),
-    name: '',
+    username: '',
     avatar: '',
     type: '',
     roles: []
@@ -14,8 +14,8 @@ const user = {
     SET_TOKEN: (state, token) => {
       state.token = token
     },
-    SET_NAME: (state, name) => {
-      state.name = name
+    SET_USERNAME: (state, username) => {
+      state.username = username
     },
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
@@ -55,7 +55,7 @@ const user = {
           } else {
             reject('getInfo: roles must be a non-null array !')
           }
-          commit('SET_NAME', data.username)
+          commit('SET_USERNAME', data.username)
           commit('SET_AVATAR', "/uploads/" + data.icon)
           commit('SET_TYPE', data.type)
           resolve(response)
